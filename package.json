@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "nodemon ./Backend-src/serverSrc.js"
   },
   "type": "module",
@@ -16,5 +16,8 @@
     "express": "^4.21.1",
     "mongoose": "^8.7.1",
     "nodemon": "^3.1.7"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
