@@ -1,4 +1,4 @@
-# MERN Social (A Microsoft Student Community Member Personal Project)
+# MERN Social (WebDev Practice)
 - For learning MERN and will most likely serve as boilerplate for future MERN projects
 
 ## Plans
