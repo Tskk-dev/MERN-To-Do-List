@@ -1,0 +1,4 @@
+#Node modules folder
+node_modules/
+#MongoDB Credentials
+.env
