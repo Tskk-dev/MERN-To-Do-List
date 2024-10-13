@@ -5,17 +5,16 @@ import User from "./Models/users.model.js";
 
 dotenv.config();
 const app = express();
-app.use(express.json()); // json middleware processing 
+
+// json middleware processing 
+app.use(express.json()); 
 
 // backend post request to register a user 
 app.post("/api/users", async (req, res) => {
   const user = req.body;
-
-
   if (!user.name || !user.email || !user.password) {
     return res.status(400).json({ success: false, msg: "Please enter all fields" });
   }
-
   const newUser = new User(user);
 
   try {
@@ -43,6 +42,7 @@ app.delete ("/api/users/:id", async (req, res) => {
   } catch (error) {} 
 });
 
+// initial server setup
 app.listen(6969, () => {
   connectDB();
   console.log("Server is started at http://localhost:6969");
