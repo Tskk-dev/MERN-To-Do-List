@@ -1,5 +1,5 @@
 import express from "express";
-import User from "./Models/users.model.js";
+import User from "../Models/users.model.js";
 
 const router = express.Router();
 
@@ -58,7 +58,7 @@ const updateUser = async (req, res) => {
   const { id } = req.params;
   const user = req.body;
 
-  if (!user.id) {
+  if (!user.password) {
     return res
       .status(400)
       .json({ success: false, msg: "Invalid Credentials" });
@@ -77,9 +77,10 @@ const updateUser = async (req, res) => {
   }
 }
 
+
+
 router.post("/api/users", registerUser);
 router.delete("/api/users/:id", deleteUser);
 router.get("/api/users", getUsers);
 router.patch("/api/users/:id", updateUser);
-
 export default router;

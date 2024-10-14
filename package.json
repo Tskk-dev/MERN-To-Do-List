@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "nodemon ./Backend-src/serverSrc.js"
+    "dev": "nodemon ./Backend-src/server-src.js"
   },
   "type": "module",
   "keywords": [],
