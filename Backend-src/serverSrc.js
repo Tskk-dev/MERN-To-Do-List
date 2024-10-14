@@ -5,11 +5,7 @@ import userRoutes from "./userRoutes.js";
 
 dotenv.config();
 const app = express();
-
-// json middleware processing 
 app.use(express.json()); 
-
-// Use user routes
 app.use(userRoutes);
 
 // Connect to DB
