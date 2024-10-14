@@ -12,7 +12,12 @@ const postSchema = new mongoose.Schema({
     postText: {
         type: String,
         required: true
-    }
+    },
+    postImage: {
+        type: String,
+        required: true
+    },
+    
 }, {
     timestamps: true
 

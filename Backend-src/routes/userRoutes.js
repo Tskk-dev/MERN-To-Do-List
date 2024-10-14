@@ -17,7 +17,7 @@ const getUsers = async (req, res) => {
 // Function that handles user registration
 const registerUser = async (req, res) => {
   const user = req.body;
-  if (!user.name || !user.email || !user.password) {
+  if (!user.name || !user.email || !user.passAword) {
     return res
       .status(400)
       .json({ success: false, msg: "Please enter all fields" });
