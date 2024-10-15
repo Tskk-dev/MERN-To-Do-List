@@ -1,19 +1,19 @@
 import mongoose  from "mongoose";
 
-const postSchema = new mongoose.Schema({ 
-    name: {
+const taskSchema = new mongoose.Schema({ 
+    taskName: {
         type: String,
         required: true
     },
-    postTitle: {
+    taskTitle: {
         type: String,
         required: true
     },
-    postText: {
+    taskText: {
         type: String,
         required: true
     },
-    postImage: {
+    taskImage: {
         type: String,
         required: true
     },
@@ -23,7 +23,7 @@ const postSchema = new mongoose.Schema({
 
 });
 
-const User = mongoose.model('Post', postSchema);
+const Task = mongoose.model('Task', postSchema);
 
-export default Post;
+export default Task;
 
