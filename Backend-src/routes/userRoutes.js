@@ -1,29 +1,17 @@
-const express = require('express');
-const bcrypt = require('bcrypt');
-const User = require('./Models/users.model.js');
+import express from 'express';
+import bcrypt from 'bcrypt';
+import User from '../models/users.model.js';
 
 const router = express.Router();
 
-// Function that handles getting all users
-const getUsers = async (req, res) => {
-  try {
-    const users = await User.find({});
-    res.status(200).json({ success: true, data: users });
-  } catch (error) {
-    console.error("Error, users not found", error.message);
-    res.status(404).json({ success: false, msg: "Users not found" });
-  }
-};
-
-// Function that handles user registration
-const registerUser = async (req, res) => {
+export const registerUser = async (req, res) => {
   const user = req.body;
   if (!user.name || !user.email || !user.password) {
     return res.status(400).json({ success: false, msg: 'Please enter all fields' });
   }
 
   try {
-    // Bcrypt implementation
+    // Hash the password (bcrypt)
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt);
 
@@ -40,10 +28,8 @@ const registerUser = async (req, res) => {
   }
 };
 
-// Function that handles deleting a user
-const deleteUser = async (req, res) => {
+export const deleteUser = async (req, res) => {
   const { id } = req.params;
-
   try {
     const user = await User.findByIdAndDelete(id);
     if (!user) {
@@ -51,40 +37,44 @@ const deleteUser = async (req, res) => {
     }
     res.status(200).json({ success: true, msg: 'User deleted successfully' });
   } catch (error) {
-    console.error('User not found', error.message);
-    res.status(404).json({ success: false, msg: 'User not found' });
+    console.error('Error, user not deleted', error.message);
+    res.status(500).json({ success: false, msg: 'Server Error' });
   }
 };
 
-// Function that handles updating a user
-const updateUser = async (req, res) => {
+export const updateUser = async (req, res) => {
   const { id } = req.params;
   const user = req.body;
-
-  if (!user.password) {
-    return res
-      .status(400)
-      .json({ success: false, msg: "Invalid Credentials" });
-  }
 
   try {
     const updatedUser = await User.findByIdAndUpdate(id, user, { new: true });
     res.status(200).json({
       success: true,
       data: updatedUser,
-      msg: "User updated successfully",
+      msg: 'User updated successfully',
     });
   } catch (error) {
-    console.error("Error, user not updated", error.message);
-    res.status(500).json({ success: false, msg: "Server Error" });
+    console.error('Error, user not updated', error.message);
+    res.status(500).json({ success: false, msg: 'Server Error' });
   }
-}
+};
+
+export const getUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json({
+      success: true,
+      data: users,
+    });
+  } catch (error) {
+    console.error('Error, users not fetched', error.message);
+    res.status(500).json({ success: false, msg: 'Server Error' });
+  }
+};
 
 router.post('/api/users', registerUser);
 router.delete('/api/users/:id', deleteUser);
-router.get("/api/users", getUsers);
-router.patch("/api/users/:id", updateUser);
+router.get('/api/users', getUsers);
+router.patch('/api/users/:id', updateUser);
 
-module.exports = router;
-module.exports.registerUser = registerUser;
-module.exports.deleteUser = deleteUser;
+export default router;
