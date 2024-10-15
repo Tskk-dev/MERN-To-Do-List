@@ -4,8 +4,8 @@
 ## Plans (Backend)
 - User Account creation (Done)
 - User Account Deletion (Done)
-- User Post Creation and Interaction
-- User Post Deletion
+- User Task Creation 
+- User Task Deletion
 
 ## Plans (Frontend)
 - Get initial frontend stuff (and hopefuly learn React) 
