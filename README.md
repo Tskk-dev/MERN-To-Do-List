@@ -1,5 +1,5 @@
-# MERN Social (WebDev Practice)
-- For learning MERN and will most likely serve as boilerplate for future MERN projects
+# MERN To-Do List
+- For learning MERN and will most likely serve as boilerplate for future MERN projects 
 
 ## Plans (Backend)
 - User Account creation (Done)
