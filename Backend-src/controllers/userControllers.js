@@ -9,10 +9,8 @@ export const registerUser = async (req, res) => {
     }
   
     try {
-      // Hash the password (bcrypt)
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(user.password, salt);
-  
       const newUser = new User(user);
       await newUser.save();
       res.status(201).json({
@@ -25,6 +23,31 @@ export const registerUser = async (req, res) => {
       res.status(500).json({ success: false, msg: 'Server Error' });
     }
   };
+
+  export const loginUser = async (req, res) => {
+    const { name, password } = req.body;
+  
+
+    if (!name || !password) {
+      return res.status(400).json({ success: false, msg: 'Please enter all fields' });
+    }
+  
+    try {
+      const user = await User.findOne({ name });
+      if (!user) {
+        return res.status(400).json({ success: false, msg: 'Username not found' });
+      }
+  
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(400).json({ success: false, msg: 'Invalid credentials' });
+      }
+      res.status(200).json({ success: true, msg: 'User logged in successfully' });
+    } catch (error) {
+      console.error('Error during login', error.message);
+      res.status(500).json({ success: false, msg: 'Server Error' });
+    }
+  };
   
   export const deleteUser = async (req, res) => {
     const { id } = req.params;
@@ -33,10 +56,10 @@ export const registerUser = async (req, res) => {
       if (!user) {
         return res.status(404).json({ success: false, msg: 'User not found' });
       }
-      res.status(200).json({ success: true, msg: 'User deleted successfully' });
+               res.status(200).json({ success: true, msg: 'User deleted successfully' });
     } catch (error) {
       console.error('Error, user not deleted', error.message);
-      res.status(500).json({ success: false, msg: 'Server Error' });
+               res.status(500).json({ success: false, msg: 'Server Error' });
     }
   };
   
@@ -69,3 +92,5 @@ export const registerUser = async (req, res) => {
       res.status(500).json({ success: false, msg: 'Server Error' });
     }
   };
+
+  

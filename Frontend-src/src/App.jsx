@@ -18,7 +18,7 @@ function App() {
           <Route path="/" element={<RegisterPage/>} />
           <Route path="/" element={<UserProfileEdit/>} />
           <Route path="/" element={<UserProfile/>} />
-          <Route path="/" element={<UserToDoList/>} />
+          <Route path="/RegisterPage" element={<UserToDoList/>} />
         </Routes>
 
       </Box>
