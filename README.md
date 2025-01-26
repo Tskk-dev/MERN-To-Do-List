@@ -4,7 +4,7 @@
 ## Plans (Backend)
 - User Account creation (Done)
 - User Account Deletion (Done)
-- User Login 
+- User Login (Semi Done) 
 - User Task Creation 
 - User Task Deletion
 
